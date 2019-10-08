@@ -1,0 +1,3 @@
+C:\Users\Zahar\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\192.6817.18\bin\cmake\win\bin\cmake.exe -E remove -f CMakeFiles\PascalTreangle.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\PascalTreangle.dir/objects.a @CMakeFiles\PascalTreangle.dir\objects1.rsp
+C:\MinGW\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\PascalTreangle.dir/objects.a -Wl,--no-whole-archive  -o PascalTreangle.exe -Wl,--out-implib,libPascalTreangle.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\PascalTreangle.dir\linklibs.rsp

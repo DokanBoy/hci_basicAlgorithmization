@@ -1,0 +1,3 @@
+C:/Users/Zahar/CLionProjects/labs/PascalTreangle/cmake-build-debug/CMakeFiles/PascalTreangle.dir
+C:/Users/Zahar/CLionProjects/labs/PascalTreangle/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Zahar/CLionProjects/labs/PascalTreangle/cmake-build-debug/CMakeFiles/rebuild_cache.dir
