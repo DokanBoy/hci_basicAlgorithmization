@@ -1,59 +1,69 @@
-//
-// Created by Zahar on 07.09.2019.
-//
-
 #include <iostream>
-#include <ctime>
 
 using namespace std;
 
-void arrayPrinter(long long unsigned int *array, int size) {
-    cout << "Row " << size << ": ";
-    for (int k = 0; k <= size; k++) {
-        cout << array[k] << " ";
+// Процедура для преобразования в двоичную кучу поддерева с корневым узлом i, что является
+// индексом в arr[]. n - размер кучи
+
+void heapify(int arr[], int n, int i)
+{
+    int largest = i;   
+// Инициализируем наибольший элемент как корень
+    int l = 2*i + 1; // левый = 2*i + 1
+    int r = 2*i + 2; // правый = 2*i + 2
+
+ // Если левый дочерний элемент больше корня
+    if (l < n && arr[l] > arr[largest])
+        largest = l;
+
+   // Если правый дочерний элемент больше, чем самый большой элемент на данный момент
+    if (r < n && arr[r] > arr[largest])
+        largest = r;
+
+    // Если самый большой элемент не корень
+    if (largest != i)
+    {
+        swap(arr[i], arr[largest]);
+
+// Рекурсивно преобразуем в двоичную кучу затронутое поддерево
+        heapify(arr, n, largest);
     }
 }
 
-int main() {
-    int rows;
-    cout << "Rows in Pascal Triangle: ";
-    cin >> rows;
+// Основная функция, выполняющая пирамидальную сортировку
+void heapSort(int arr[], int n)
+{
+  // Построение кучи (перегруппируем массив)
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
 
-    // Start the timer
-    clock_t start_time = clock();
+   // Один за другим извлекаем элементы из кучи
+    for (int i=n-1; i>=0; i--)
+    {
+        // Перемещаем текущий корень в конец
+        swap(arr[0], arr[i]);
 
-    auto *current_row = new long long unsigned int[rows];
-    auto *next_row = new long long unsigned int[rows];
-
-    // Set initial values
-    next_row[0] = 1;
-    current_row[0] = 1;
-
-    for (int i = 1; i < rows; i++) {
-        next_row[i] = 0;
-        current_row[i] = 0;
+        // вызываем процедуру heapify на уменьшенной куче
+        heapify(arr, i, 0);
     }
+}
 
-    for (int i = 0; i <= rows; i++) {
-        // Fill the N line on the previous one
-        for (int j = 0; j < rows; j++) {
-            next_row[j + 1] = current_row[j] + current_row[j + 1];
-        }
-        // Print the N line from i elements
-        arrayPrinter(current_row, i);
+/* Вспомогательная функция для вывода на экран массива размера n*/
+void printArray(int arr[], int n)
+{
+    for (int i=0; i<n; ++i)
+        cout << arr[i] << " ";
+    cout << "\n";
+}
 
-        for (int l = 1; l < rows; l++) {
-            current_row[l] = next_row[l];
-        }
-        cout << endl;
-    }
-    cout << endl;
+// Управляющая программа
+int main()
+{
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    int n = sizeof(arr)/sizeof(arr[0]);
 
-    delete[] next_row;
-    delete[] current_row;
+    heapSort(arr, n);
 
-    clock_t end_time = clock();
-    cout << end_time - start_time <<  "ms" <<endl;
-
-    return 0;
+    cout << "Sorted array is \n";
+    printArray(arr, n);
 }
